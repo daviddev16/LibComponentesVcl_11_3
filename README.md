@@ -97,6 +97,6 @@ end;
 ![Exemplo01](https://i.imgur.com/PEmeeSJ.png)
 
 ## Aviso
-Essa biblioteca ainda está em desenvolvimento. É utilizada em alguns projetos que estou fazendo, sendo assim, é possível que haja bugs ou algumas implementações faltando.
+Essa biblioteca ainda está em desenvolvimento. É utilizada em alguns projetos que estou fazendo, sendo assim, é possível que tenha bugs ou algumas implementações faltando.
 
 

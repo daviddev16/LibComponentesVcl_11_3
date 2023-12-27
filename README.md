@@ -5,8 +5,27 @@ O componente principal é o ``TDCGrid``, que é capaz de renderizar Badges, Text
 que informa quais customizações serão feitas na célula. Quando utilizado um ``TDataSet``, é necessário implementar um
 ``IDCDataSetInterceptor`` que determinará como o campo do dataSet será renderizado na Grid.
 
-## Aviso
-Essa biblioteca ainda está em desenvolvimento. É utilizada em alguns projetos que estou fazendo, sendo assim, é possível que haja bugs ou algumas implementações faltando.
+## TDCGrid
+
+A renderização é feita através do JSONArray da célula da Grid, que representa todos os elementos gráficos da célula.
+Um exemplo para renderizar uma ``BADGE`` na célula da Grid:
+```pascal
+dcGrid.Cells[2, 1] := '[{"tp":"BADGE","bg":"#000000", "fg": "#ffffff", "tx": "Teste"}]';
+```
+ou
+```pascal
+var
+  ComJSONArray : TJSONArray;
+begin
+  ComJSONArray := TJSONArray.Create;
+  ComJSONArray.Add(TDCBadgeCellData.CreateJSONObject('#ffffff', '#000000', 'Teste'));
+  dcGrid.Cells[2, 1] := ComJSONArray.ToString;
+  ComJSONArray.Free;
+end;
+```
+Quando utilizado ``dcGrid.DataSet := MeuDataSetOuQuery;`` a renderização da grid é feita por ``IDCDataSetInterceptor``
+que intercepta os fields vindos do DataSet e preenche com o valor de retorno de ``GetDataCellValue``, conforme o exemplo
+abaixo:
 
 # Exemplo
 Neste exemplo, criamos uma classe que extende ``IDCDataSetInterceptor`` chamada ``TMainGridInterceptor``, que fará a renderização de uma Grid principal. 
@@ -76,3 +95,8 @@ end;
 ````
 
 ![Exemplo01](https://i.imgur.com/PEmeeSJ.png)
+
+## Aviso
+Essa biblioteca ainda está em desenvolvimento. É utilizada em alguns projetos que estou fazendo, sendo assim, é possível que haja bugs ou algumas implementações faltando.
+
+
